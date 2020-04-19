@@ -15,5 +15,5 @@ def canUnlockAll(boxes):
             else:
                 return False
         box_number += 1
-    
+
     return return_value
