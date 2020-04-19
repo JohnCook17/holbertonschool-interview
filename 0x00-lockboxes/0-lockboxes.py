@@ -3,7 +3,7 @@
 
 def canUnlockAll(boxes):
     my_set_of_keys = set()
-    return_value = True
+    return_value = False
     box_number = 0
     for values in boxes:
         if values:
@@ -14,6 +14,10 @@ def canUnlockAll(boxes):
                     return_value = True
                 else:
                     return False
+        elif len(boxes) == 1:
+            return_value = True
+        elif len(boxes) > 1 and values is []:
+            return_value = False
         box_number += 1
 
     return return_value
