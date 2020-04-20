@@ -3,17 +3,24 @@
 
 def canUnlockAll(boxes):
     my_set_of_keys = set()
+    new_set_of_keys = []
     return_value = True
-    box_number = 0
-    for values in boxes:
-        if values:
-            my_set_of_keys.update(values)
-            (_, *key_numbers) = enumerate(my_set_of_keys, 0)
-            if key_numbers and box_number != 0:
-                if box_number in list(sum(key_numbers, ())):
-                    return_value = True
-                else:
-                    return False
-        box_number += 1
+    # print(boxes)
+    for box in enumerate(boxes):
+        # print("box = {}".format(box[0]))
+        # print("new keys = {}".format(box[1]))
+        my_set_of_keys.update(box[1])
+        for unlock in my_set_of_keys:
+            if unlock:
+                new_set_of_keys.append(boxes[unlock])
+        # print(new_set_of_keys)
+        my_set_of_keys.update([key[0] for key in new_set_of_keys if key])
+        # print(my_set_of_keys)
+        # print(box)
+        if box != 0 and box[0] > 0:
+            if box[0] in my_set_of_keys:
+                return_value = True
+            else:
+                return False
 
     return return_value
