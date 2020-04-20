@@ -11,8 +11,10 @@ def canUnlockAll(boxes):
         # print("new keys = {}".format(box[1]))
         my_set_of_keys.update(box[1])
         for unlock in my_set_of_keys:
-            if unlock:
+            try:
                 new_set_of_keys.append(boxes[unlock])
+            except IndexError:
+                continue
         # print(new_set_of_keys)
         my_set_of_keys.update([key[0] for key in new_set_of_keys if key])
         # print(my_set_of_keys)
