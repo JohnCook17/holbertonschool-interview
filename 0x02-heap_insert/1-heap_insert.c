@@ -1,16 +1,17 @@
 #include <stdlib.h>
-#include <stdio.h>
 #include "binary_trees.h"
 
 void make_heap(heap_t *head, heap_t *new_node, int value)
 {
+	if (head->parent)
+		make_heap(head->parent, new_node, value);
 	if (value > head->n)
 		{
 			new_node->n = head->n;
 			head->n = value;
 		}
-		else
-			new_node->n = value;
+	else
+		new_node->n = value;
 }
 
 heap_t *possition_node(heap_t *head, heap_t *new_node, int value, int left_or_right)
@@ -24,7 +25,6 @@ heap_t *possition_node(heap_t *head, heap_t *new_node, int value, int left_or_ri
 		new_node->parent = new_head;
 		new_node->left = NULL;
 		new_node->right = NULL;
-		printf("\ninsert left");
 		return (new_node);
 	}
 	else if (new_head->right == NULL)
@@ -34,7 +34,6 @@ heap_t *possition_node(heap_t *head, heap_t *new_node, int value, int left_or_ri
 		new_node->parent = new_head;
 		new_node->left = NULL;
 		new_node->right = NULL;
-		printf("\ninsert right");
 		return (new_node);
 	}
 	else
@@ -43,15 +42,12 @@ heap_t *possition_node(heap_t *head, heap_t *new_node, int value, int left_or_ri
 		{
 			new_head = new_head->parent->left;
 		}
-		printf("current parent = %i \n", new_head->n);
 		if (!new_head->left->right)
 		{
-			printf("\ngo left\n");
 			possition_node(new_head->left, new_node, value, left_or_right);
 		}	
 		else
 		{
-			printf("\ngo right\n");
 			possition_node(new_head->right, new_node, value, left_or_right);
 		}	
 	}
@@ -79,7 +75,6 @@ heap_t *heap_insert(heap_t **root, int value)
 		new_node->parent = NULL;
 		new_node->left = NULL;
 		new_node->right = NULL;
-		printf("No head found\n");
 		return new_node;
 	}
 	else
