@@ -2,10 +2,11 @@
 #include <stdio.h>
 #include "binary_trees.h"
 
-int possition_node(heap_t *head, heap_t *new_node, int value, int left_or_right)
+heap_t *possition_node(heap_t *head, heap_t *new_node, int value)
 {
     heap_t *new_head;
     new_head = head;
+    do{
         if (new_head->left == NULL)
         {
             new_head->left = new_node;
@@ -19,13 +20,9 @@ int possition_node(heap_t *head, heap_t *new_node, int value, int left_or_right)
             new_node->parent = new_head;
             new_node->left = NULL;
             new_node->right = NULL;
-            new_head = new_node->parent;
-            left_or_right = 1;
-            printf("\nleft");
-            return (left_or_right);
-            
+            printf("left\n");
         }
-        else if (new_head->right == NULL)
+        else
         {
             new_head->right = new_node;
             if (value > new_head->n)
@@ -38,45 +35,25 @@ int possition_node(heap_t *head, heap_t *new_node, int value, int left_or_right)
             new_node->parent = new_head;
             new_node->left = NULL;
             new_node->right = NULL;
-            printf("\nright");
-            new_head = new_node->parent->left;
-            left_or_right = 0;
-            return (left_or_right);
-        }
-        else
-        {
-            if (new_head->parent)
-            {
-                if (new_head->right->left)
-                    return (possition_node(new_head->left, new_node, value, left_or_right));
-                else
-                {
-                    while (new_head->parent)
-                    {
-                        new_head = new_head->parent;
-                    }
-                    return (possition_node(new_head->right, new_node, value, left_or_right));
-                }
-            }
-            else
-                return (possition_node(new_head->left, new_node, value, left_or_right));
+            printf("right\n");
+            new_head = new_head->left;
         }
         
-    return (1);
+    }while (new_head->left);
+    return new_head;
 }
 
 heap_t *heap_insert(heap_t **root, int value)
 {
     heap_t *new_node;
     heap_t *head;
-    int left_or_right;
 
-    /* left_or_right: 0 for left 1 for right */
-    left_or_right = 0;
     head = *root;
 
     /* Step 0: make a new node if no memory avaliable return NULL */
-    new_node = binary_tree_node(head, value);
+    new_node = malloc(sizeof(heap_t));
+    if (new_node == NULL)
+        return (NULL);
     
     /* Step 1: position the new node */
     if (head == NULL)
@@ -91,7 +68,7 @@ heap_t *heap_insert(heap_t **root, int value)
     }
     else
     {
-        left_or_right = possition_node(head, new_node, value, left_or_right);
+        possition_node(head, new_node, value);
         return new_node;
     }
     /* Step 2: heapify the heap with max stack
