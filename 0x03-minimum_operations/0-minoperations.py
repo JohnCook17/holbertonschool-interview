@@ -4,6 +4,8 @@
 
 def minOperations(n):
     """uses prime numbers to calculate the minimum operations of n"""
+    if not isinstance(n, int):
+        return 0
     if n < 1:
         return 0
     ops = []
