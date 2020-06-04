@@ -19,7 +19,7 @@ try:
             my_dict[error_code] = my_dict[error_code] + 1
         if file_size_str is not None:
             file_size += int(file_size_str[0])
-        if line_number % 10 == 0 and line_number >= 10:
+        if line_number % 10 == 0:
             print("File size: {}".format(file_size))
             for key in sorted(my_dict.keys()):
                 if my_dict[key] > 0:
@@ -36,3 +36,4 @@ except KeyboardInterrupt:
     for key in sorted(my_dict.keys()):
         if my_dict[key] > 0:
             print("{}: {}".format(key, my_dict[key]))
+    raise
