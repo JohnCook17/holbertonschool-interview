@@ -37,10 +37,10 @@ int is_palindrome(unsigned long n)
 	n_str = itoa(n, 10);
 	length_n = strlen(n_str);
 
+	if (length_n == 1)
+		return (1);
 	while (start_n != length_n)
 	{
-		printf("%c\n", n_str[start_n]);
-		printf("%c\n", n_str[length_n - 1]);
 		if (n_str[start_n] != n_str[length_n - 1])
 		{
 			return (0);
