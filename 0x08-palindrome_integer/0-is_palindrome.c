@@ -32,21 +32,24 @@ int is_palindrome(unsigned long n)
 {
 	char *n_str;
 	int length_n;
-	int start_n = 0;
+	int start_n;
+	int end_n;
 
 	n_str = itoa(n, 10);
 	length_n = strlen(n_str);
 
 	if (length_n == 1)
 		return (1);
-	while (start_n != length_n)
+	start_n = length_n % 2;
+	end_n = length_n % 2;
+	while (start_n != -1 && end_n != length_n + 1)
 	{
-		if (n_str[start_n] != n_str[length_n - 1])
+		if (n_str[start_n] != n_str[end_n])
 		{
 			return (0);
 		}
-		start_n++;
-		length_n--;
+		start_n--;
+		end_n++;
 	}
 	return (1);
 }
