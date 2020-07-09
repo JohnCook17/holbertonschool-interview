@@ -59,7 +59,7 @@ void carpet(grid g, int iter)
 	}
 }
 /**
- * my_pow - UNLITED POWER! or at least exponets
+ * my_pow - UNLIMITED POWER! or at least exponets
  * @base: the base number
  * @expo: the exponent to use
  * Return: the base to the power
@@ -80,7 +80,7 @@ int my_pow(int base, int expo)
 int allocate_g(char ***g, int n, const char sep)
 {
 	int i, j;
-	int size = my_pow(3, n + 1);
+	int size = my_pow(3, n);
 
 	*g = (char **)calloc(size, sizeof(char *));
 		if (*g == NULL)
