@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include "menger.h"
+
 /**
  * hollow - makes holes in the grid
  * @g: the grid struck to add holes to
