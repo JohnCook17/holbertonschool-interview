@@ -51,7 +51,7 @@ def entry_point():
     board = make_board(N)
     for bi, br in enumerate(board):
         for bj, bc in enumerate(br):
-            queen_tf = solveNQUtil(board, bi, N)
+            queen_tf = solveNQUtil(board, 0, N)
             # print(queen_tf)
             if queen_tf is True:
                 # prints the board
