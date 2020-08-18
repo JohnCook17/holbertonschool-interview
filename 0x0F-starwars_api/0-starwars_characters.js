@@ -8,17 +8,20 @@ const options = {
   method: 'GET'
 };
 
-request(options, (err, res, body) => {
-  if (err) {
-    return console.log(err);
-  }
-  let obj = JSON.parse(body);
-  for (let i = 0; i < obj.characters.length; i++) {
-    request(obj.characters[i], (err, res, body) => {
-      if (err) {
-        return console.log(err);
-      }
-      console.log(JSON.parse(body).name);
-    });
-  }
-});
+if (Number.isInteger(parseInt(myArgs, 10)))
+{
+  request(options, (err, res, body) => {
+    if (err) {
+      return console.log(err);
+    }
+    let obj = JSON.parse(body);
+    for (let i = 0; i < obj.characters.length; i++) {
+      request(obj.characters[i], (err, res, body) => {
+        if (err) {
+          return console.log(err);
+        }
+        console.log(JSON.parse(body).name);
+      });
+    }
+  });
+}
