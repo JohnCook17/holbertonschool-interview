@@ -10,9 +10,9 @@ function luke (obj, i) {
         return console.log(err);
       }
       resolve(JSON.parse(body).name);
-    })
+    });
   });
-};
+}
 
 function obiwan () {
   const request = require('request');
@@ -29,9 +29,9 @@ function obiwan () {
         return console.log(err);
       }
       const obj = JSON.parse(body);
-      //console.log(obj);
+      // console.log(obj);
       for (let i = 0; i < obj.characters.length; i++) {
-        let character = await luke(obj, i);
+        const character = await luke(obj, i);
         console.log(character);
       }
     });
