@@ -62,7 +62,8 @@ def count_words(subreddit, word_list, *args):
     # print(count_title)
     # print(word_list[count_word_list])
 
-    if count_title < 25 and not isinstance(my_dict, list) and result.status_code == 200:
+    if ((count_title < 25 and not isinstance(my_dict, list) and
+         result.status_code == 200)):
         my_stirng = (result
                      .json()["data"]["children"][count_title]["data"]["title"]
                      .lower())
@@ -109,7 +110,8 @@ def count_words(subreddit, word_list, *args):
                            count_title)
     elif count_title == 25 and result.status_code == 200:
         # print(count_title)
-        count_title == 0
+        count_title = 0
+        count_word_list = 0
         # print("after")
         after = result.json()["data"]["after"]
         # print(after)
