@@ -39,7 +39,6 @@ def count_words(subreddit, word_list, *args):
         result = args[1]
     except IndexError:
         # print("get")
-        payload = {}
         result = requests.get(base_url + "/r/{}/hot.json".format(subreddit),
                               headers=headers)
 
@@ -63,7 +62,7 @@ def count_words(subreddit, word_list, *args):
     # print(count_title)
     # print(word_list[count_word_list])
 
-    if count_title < 25 and not isinstance(my_dict, list):
+    if count_title < 25 and not isinstance(my_dict, list) and result.status_code == 200:
         my_stirng = (result
                      .json()["data"]["children"][count_title]["data"]["title"]
                      .lower())
@@ -108,6 +107,23 @@ def count_words(subreddit, word_list, *args):
                            my_dict,
                            count_word_list,
                            count_title)
+    elif count_title == 25 and result.status_code == 200:
+        # print(count_title)
+        count_title == 0
+        # print("after")
+        after = result.json()["data"]["after"]
+        # print(after)
+        result = requests.get(base_url + "/r/{}/hot.json&after={}"
+                              .format(subreddit, after),
+                              headers=headers)
+        return count_words(subreddit,
+                           word_list,
+                           r,
+                           result,
+                           my_dict,
+                           count_word_list,
+                           count_title)
+
     else:
         if not isinstance(my_dict, list):
             # print(my_dict)
