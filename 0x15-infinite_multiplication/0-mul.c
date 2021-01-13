@@ -151,8 +151,7 @@ int main(int argc, char **argv)
 		print_error();
 		exit(98);
 	}
-	a = argv[1];
-	b = argv[2];
+	a = argv[1], b = argv[2];
 	c = malloc(sizeof(char));
 	if (c == NULL)
 	{
@@ -183,5 +182,5 @@ int main(int argc, char **argv)
 	if (c[0] == '0')
 		memory_move(c, c + 1, la + lb);
 	print_char(c);
-	return(1);
+	return (1);
 }
