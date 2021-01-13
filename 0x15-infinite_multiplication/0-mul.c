@@ -183,4 +183,5 @@ int main(int argc, char **argv)
 	if (c[0] == '0')
 		memory_move(c, c + 1, la + lb);
 	print_char(c);
+	return(1);
 }
