@@ -1,73 +1,93 @@
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include "sort.h"
 
-void merge (int *a, int n, int m)
+void merge(int arr[], int l, int m, int r)
 {
     int i, j, k;
-    int n1 = m;
-    int n2 = n - m;
-    int *x = malloc(n * sizeof (int));
-
-    int R[n1], L[n2];
-
-    if (x == NULL)
-        return;
+    int n1 = m - l + 1;
+    int n2 = r - m;
+    int L[n1], R[n2];
 
     printf("Merging...\n");
-
-    for (i = 0, j = m, k = 0; k < n; k++)
+    printf("[left]: ");
+    for (i = 0; i < n1; i++)
     {
-        if (j == n)
+        L[i] = arr[l + i];
+        if (i != 0)
         {
-            x[k] = a[i];
-            L[i] = x[k];
+            printf(", ");
+        }
+        printf("%d", L[i]);
+    }
+    printf("\n");
+    printf("[right]: ");
+    for (j = 0; j < n2; j++)
+    {
+        R[j] = arr[m + 1 + j];
+        if (j != 0)
+        {
+            printf(", ");
+        }
+        printf("%d", R[j]);
+    }
+    printf("\n");
+    i = 0;
+    j = 0;
+    k = l;
+    printf("[Done]: ");
+    while (i < n1 && j < n2)
+    {
+        if (i != 0 || j != 0)
+        {
+            printf(", ");
+        }
+        if (L[i] <= R[j])
+        {
+            arr[k] = L[i];
             i++;
-        }
-        else if (i == m)
-        {
-            x[k] = a[j];
-            R[j] = x[k];
-            j++;
-        }
-        else if (a[j] < a[i])
-        {
-            x[k] = a[j];
-            R[j] = x[k];
-            j++;
         }
         else
         {
-            x[k] = a[i];
-            L[i++] = x[k];
-            i++;
+            arr[k] = R[j];
+            j++;
         }
-        /*
-        x[k] = j == n      ? a[i++]
-             : i == m      ? a[j++]
-             : a[j] < a[i] ? a[j++]
-             :               a[i++];
-        */
+        printf("%d", arr[k]);
+        k++;
     }
-    for (i = 0; i < n; i++) {
-        a[i] = x[i];
+    while (i < n1)
+    {
+        arr[k] = L[i];
+        i++;
+        k++;
     }
-    printf("[left]: ");
-    print_array(L, m);
-    printf("[right]: ");
-    print_array(R, n - m);
-    printf("[Done]: ");
-    print_array(x, n);
-    free(x);
-    
-
+    while (j < n2)
+    {
+        arr[k] = R[j];
+        j++;
+        k++;
+    }
+    if (k < r)
+        printf("\n");
 }
- 
-void merge_sort (int *array, size_t size) {
-    if (size < 2)
-        return;
-    int m = size / 2;
-    merge_sort(array, m);
-    merge_sort(array + m, size - m);
-    merge(array, size, m);
+
+
+void mergesort(int arr[], int l, int r)
+{
+    int m;
+
+    if (l < r)
+    {
+        m = l + (r - l) / 2;
+        mergesort(arr, l, m);
+        mergesort(arr, m + 1, r);
+        merge(arr, l, m, r);
+    }
+}
+
+
+void merge_sort(int *array, size_t size)
+{
+    mergesort(array, 0, size - 1);
+    printf(", %i\n", array[size - 1]);
 }
