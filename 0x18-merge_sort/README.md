@@ -1,3 +1,3 @@
-## 0x18 Merge Sort
+# 0x18 Merge Sort
 
-# Top down merge sort
+## Top down merge sort
