@@ -5,6 +5,10 @@
 def makeChange(coins, total):
     """tries to give exact change given a list of coins with a specified values
        if unable to do so returns -1"""
+
+    if total == 0:
+        return 0
+
     coins.sort(reverse=True)
 
     new_total = total
