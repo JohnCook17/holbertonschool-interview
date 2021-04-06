@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-""""""
+"""Pascal's Triangle"""
 
 
 def pascal_triangle(n):
-    """"""
+    """Pascal's Triangle, n is how many rows"""
     if n <= 0:
         return []
 
