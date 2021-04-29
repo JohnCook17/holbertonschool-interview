@@ -30,5 +30,6 @@ def isWinner(x, nums):
 
         return primes
 
-    print(primes(nums))
+    moves = primes(nums)
 
+    return "Ben"
